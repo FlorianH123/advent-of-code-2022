@@ -9,15 +9,15 @@ public class Pair<L, R> {
         this.right = right;
     }
 
+    public static <L, R> Pair<L, R> of(final L left, final R right) {
+        return new Pair<>(left, right);
+    }
+
     public L left() {
         return left;
     }
 
     public R right() {
         return right;
-    }
-
-    public static <L,R> Pair<L,R> of(final L left, final R right) {
-        return new Pair<>(left, right);
     }
 }

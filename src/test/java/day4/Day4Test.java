@@ -5,7 +5,7 @@ import util.InputFileUtils;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day4Test {
 

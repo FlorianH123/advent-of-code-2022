@@ -2,7 +2,7 @@ package day2;
 
 import util.InputFileUtils;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.List;
 
 public class Day2 {
@@ -52,7 +52,7 @@ public class Day2 {
         return totalScore;
     }
 
-    private static GameResultE decryptGameResult(final String encryptedGameResult   ) {
+    private static GameResultE decryptGameResult(final String encryptedGameResult) {
         return switch (encryptedGameResult) {
             case "X" -> GameResultE.LOSE;
             case "Y" -> GameResultE.DRAW;
