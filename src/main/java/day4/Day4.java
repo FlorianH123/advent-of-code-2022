@@ -4,13 +4,10 @@ import util.InputFileUtils;
 import util.Pair;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Day4 {
-    public static void main(String[] args) throws IOException {
+    public static void main(final String[] args) throws IOException {
         final var lines = InputFileUtils.getLines("day4/input.txt");
 
         System.out.println("--- part1 ---");
@@ -22,76 +19,50 @@ public class Day4 {
         System.out.printf("There are %d overlapping sections%n", totalMatches2);
     }
 
-    public static int part1(final List<String> lines) {
-        final var linesSpread = spreadLines(lines);
-        var totalMatches = 0;
+    public static long part1(final List<String> lines) {
+        final var sectionBoundaries = getSectionBoundaries(lines);
 
-        for (final var pair : linesSpread) {
-            final var leftElf = "," + String.join(",", pair.left()) + ",";
-            final var rightElf = "," + String.join(",", pair.right()) + ",";
+        return sectionBoundaries.stream().filter((boundaryPair) -> {
+            final var leftSectionBoundary = boundaryPair.left();
+            final var rightSectionBoundary = boundaryPair.right();
 
-            if (leftElf.contains(rightElf) || rightElf.contains(leftElf)) {
-                totalMatches++;
-            }
-        }
-
-        return totalMatches;
+            return leftSectionBoundary.containsBoundary(rightSectionBoundary)
+                    || rightSectionBoundary.containsBoundary(leftSectionBoundary);
+        }).count();
     }
 
-    public static int part2(final List<String> lines) {
-        final var linesSpread = spreadLines(lines);
-        var totalMatches = 0;
+    public static long part2(final List<String> lines) {
+        final var sectionBoundaries = getSectionBoundaries(lines);
 
-        for (final var pair : linesSpread) {
-            final var leftElf = pair.left();
-            final var rightElf = pair.right();
-            final Set<String> leftElfSectionSet = new HashSet<>(leftElf);
-            final Set<String> rightElfSectionSet = new HashSet<>(rightElf);
-            var duplicatedSectionFound = false;
+        return sectionBoundaries.stream().filter((boundaryPair) -> {
+            final var leftSectionBoundary = boundaryPair.left();
+            final var rightSectionBoundary = boundaryPair.right();
 
-            for (var section : leftElf) {
-                if (rightElfSectionSet.contains(section)) {
-                    totalMatches++;
-                    duplicatedSectionFound = true;
-                    break;
-                }
-            }
-
-            if (!duplicatedSectionFound) {
-                for(var section : rightElf) {
-                    if (leftElfSectionSet.contains(section)) {
-                        totalMatches++;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return totalMatches;
+            return leftSectionBoundary.hasSectionInBoundary(rightSectionBoundary)
+                    || rightSectionBoundary.hasSectionInBoundary(leftSectionBoundary);
+        }).count();
     }
 
-    private static List<Pair<List<String>, List<String>>> spreadLines(final List<String> lines) {
+    private static List<Pair<SectionBoundary, SectionBoundary>> getSectionBoundaries(final List<String> lines) {
         return lines.stream().map(line -> {
             if (!line.contains(",")) {
                 throw new IllegalArgumentException("Line cannot be split!");
             }
 
             final var linesSplit = line.split(",");
-            final var firstElf = spreadSections(linesSplit[0]);
-            final var secondElf = spreadSections(linesSplit[1]);
+            final var leftSectionBoundary = getSectionBoundaries(linesSplit[0]);
+            final var rightSectionBoundary = getSectionBoundaries(linesSplit[1]);
 
-            return Pair.of(firstElf, secondElf);
+            return Pair.of(leftSectionBoundary, rightSectionBoundary);
         }).toList();
     }
 
-    private static List<String> spreadSections(final String sections) {
-        final var sectionSplit = sections.split("-");
-        final var sectionList = new ArrayList<String>();
-
-        for (int i = Integer.parseInt(sectionSplit[0]) ; i <= Integer.parseInt(sectionSplit[1]) ; i++) {
-            sectionList.add(String.valueOf(i));
+    private static SectionBoundary getSectionBoundaries(final String sections) {
+        if (!sections.contains("-")) {
+            throw new IllegalArgumentException("Section boundary not contains \"-\"");
         }
 
-        return sectionList;
+        final var boundary = sections.split("-");
+        return SectionBoundary.of(Integer.parseInt(boundary[0]), Integer.parseInt(boundary[1]));
     }
 }

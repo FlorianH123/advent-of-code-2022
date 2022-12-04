@@ -1,23 +1,23 @@
 package util;
 
 public class Pair<L, R> {
-    private final L lhs;
-    private final R rhs;
+    protected final L left;
+    protected final R right;
 
-    private Pair(final L lhs, final R rhs) {
-        this.lhs = lhs;
-        this.rhs = rhs;
+    protected Pair(final L left, final R right) {
+        this.left = left;
+        this.right = right;
     }
 
     public L left() {
-        return lhs;
+        return left;
     }
 
     public R right() {
-        return rhs;
+        return right;
     }
 
-    public static <L,R> Pair<L,R> of(final L lhs, final R rhs) {
-        return new Pair<>(lhs, rhs);
+    public static <L,R> Pair<L,R> of(final L left, final R right) {
+        return new Pair<>(left, right);
     }
 }
