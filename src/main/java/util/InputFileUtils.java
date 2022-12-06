@@ -23,6 +23,21 @@ public class InputFileUtils {
         }
     }
 
+    public static String getString(final String filename) throws IOException {
+        try (final InputStream is = Day1.class.getClassLoader().getResourceAsStream(filename)) {
+            if (is == null) {
+                throw new FileNotFoundException("File " + filename + " not found!");
+            }
+
+            try (
+                    final InputStreamReader isr = new InputStreamReader(is);
+                    final BufferedReader br = new BufferedReader(isr)
+            ) {
+                return br.readLine();
+            }
+        }
+    }
+
     public static List<List<String>> partitionBy(final List<String> lines, final int batchSize) {
         final List<List<String>> partionedList = new ArrayList<>();
         var index = 0;
