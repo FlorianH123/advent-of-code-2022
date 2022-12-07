@@ -1,11 +1,10 @@
 package day4;
 
-import org.junit.jupiter.api.Test;
-import util.InputFileUtils;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import util.InputFileUtils;
 
 class Day4Test {
 

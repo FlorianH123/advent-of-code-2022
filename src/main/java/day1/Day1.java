@@ -1,10 +1,9 @@
 package day1;
 
-import util.InputFileUtils;
-
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import util.InputFileUtils;
 
 public class Day1 {
 	public static void main(final String[] args) throws IOException {

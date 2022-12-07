@@ -1,10 +1,9 @@
 package day4;
 
-import util.InputFileUtils;
-import util.Pair;
-
 import java.io.IOException;
 import java.util.List;
+import util.InputFileUtils;
+import util.Pair;
 
 public class Day4 {
 	public static void main(final String[] args) throws IOException {

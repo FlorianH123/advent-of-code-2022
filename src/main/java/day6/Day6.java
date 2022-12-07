@@ -1,9 +1,8 @@
 package day6;
 
-import util.InputFileUtils;
-
 import java.io.IOException;
 import java.util.HashSet;
+import util.InputFileUtils;
 
 public class Day6 {
 	public static void main(String[] args) throws IOException {
