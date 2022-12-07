@@ -1,9 +1,7 @@
 package day2;
 
 public enum ChoiceE {
-    ROCK(1),
-    PAPER(2),
-    SCISSORS(3);
+    ROCK(1), PAPER(2), SCISSORS(3);
 
     private final int value;
 

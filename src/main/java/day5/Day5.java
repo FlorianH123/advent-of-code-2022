@@ -46,7 +46,8 @@ public class Day5 {
         return buildTopCratesMessage(crateStacks);
     }
 
-    private static void executeInstructions(final List<Instruction> instructions, final List<Stack<String>> crateStacks, final boolean canMoveMultiple) {
+    private static void executeInstructions(final List<Instruction> instructions, final List<Stack<String>> crateStacks,
+                                            final boolean canMoveMultiple) {
         for (final var instruction : instructions) {
             final var fromStackNumber = instruction.getFromStack();
             final var toStackNumber = instruction.getToStack();
@@ -64,7 +65,8 @@ public class Day5 {
             } else {
                 for (int i = 0; i < instruction.getAmount(); i++) {
                     if (fromStack.isEmpty()) {
-                        throw new IllegalArgumentException(String.format("%s want to pop from stack %d but it was empty", instruction, fromStackNumber));
+                        throw new IllegalArgumentException(String
+                                .format("%s want to pop from stack %d but it was empty", instruction, fromStackNumber));
                     }
 
                     final var crate = fromStack.pop();
@@ -89,7 +91,7 @@ public class Day5 {
     /**
      * Returns a list with stacks
      *
-     * @param stacksNumberString " 1   2   3"
+     * @param stacksNumberString " 1 2 3"
      */
     private static List<Stack<String>> createCrateStacks(final String stacksNumberString) {
         final List<Stack<String>> crateStacks = new ArrayList<>();
@@ -109,7 +111,6 @@ public class Day5 {
                 final Character c = cratesCharArray[j];
                 if (!c.equals(' ')) {
                     crateStacks.get(crateIndex).push(String.valueOf(c));
-
                 }
 
                 crateIndex++;

@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id "io.freefair.lombok" version "6.6"
+    id "com.diffplug.spotless" version "6.12.0"
 }
 
 group 'de.n4'
@@ -16,4 +18,13 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        importOrder()
+        removeUnusedImports()
+        eclipse()
+        formatAnnotations()
+    }
 }

@@ -44,10 +44,6 @@ public class Instruction {
 
     @Override
     public String toString() {
-        return "Instruction{" +
-                "amount=" + amount +
-                ", fromStack=" + fromStack +
-                ", toStack=" + toStack +
-                '}';
+        return "Instruction{" + "amount=" + amount + ", fromStack=" + fromStack + ", toStack=" + toStack + '}';
     }
 }

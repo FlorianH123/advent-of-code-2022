@@ -1,9 +1,7 @@
 package day2;
 
 public enum GameResultE {
-    WIN(6),
-    LOSE(0),
-    DRAW(3);
+    WIN(6), LOSE(0), DRAW(3);
 
     private final int value;
 

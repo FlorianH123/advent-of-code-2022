@@ -14,10 +14,8 @@ public class InputFileUtils {
                 throw new FileNotFoundException("File " + filename + " not found!");
             }
 
-            try (
-                    final InputStreamReader isr = new InputStreamReader(is);
-                    final BufferedReader br = new BufferedReader(isr)
-            ) {
+            try (final InputStreamReader isr = new InputStreamReader(is);
+                 final BufferedReader br = new BufferedReader(isr)) {
                 return br.lines().toList();
             }
         }
@@ -29,10 +27,8 @@ public class InputFileUtils {
                 throw new FileNotFoundException("File " + filename + " not found!");
             }
 
-            try (
-                    final InputStreamReader isr = new InputStreamReader(is);
-                    final BufferedReader br = new BufferedReader(isr)
-            ) {
+            try (final InputStreamReader isr = new InputStreamReader(is);
+                 final BufferedReader br = new BufferedReader(isr)) {
                 return br.readLine();
             }
         }
