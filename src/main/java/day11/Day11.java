@@ -31,7 +31,8 @@ public class Day11 {
 	public static Long part2(final List<String> lines) {
 		var monkeys = parseMonkeys(lines);
 
-		// Didn't understand how to come up with this solution. Solution copied from reddit :(
+		// Didn't understand how to come up with this solution. Solution copied from
+		// reddit :(
 		var modulus = monkeys.stream().map(Monkey::getTestDivisor).reduce(1L, (x, y) -> x * y);
 
 		return playRounds(monkeys, 10_000, worryLevel -> worryLevel % modulus);
