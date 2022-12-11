@@ -26,26 +26,36 @@ public class Monkey {
 	}
 
 	public void inspectItem() {
-		inspectedItems++;
+		this.inspectedItems++;
 	}
 
 	public void testWorryLevel() {
-		var itemWorryLevel = itemWorryLevelList.get(0);
+		var itemWorryLevel = this.getFirstWorryLevel();
 		itemWorryLevel = this.updateWorryLevel.apply(itemWorryLevel);
-		itemWorryLevelList.set(0, itemWorryLevel);
+		this.setFirstWorryLeve(itemWorryLevel);
 	}
 
-	public Pair<Integer, Long> throwItem(final Function<Long, Long> reliefFunction) {
-		var itemWorryLevel = itemWorryLevelList.get(0);
-
+	public void applyRelief(final Function<Long, Long> reliefFunction) {
+		var itemWorryLevel = this.getFirstWorryLevel();
 		itemWorryLevel = reliefFunction.apply(itemWorryLevel);
-		itemWorryLevelList.set(0, itemWorryLevel);
+		this.setFirstWorryLeve(itemWorryLevel);
+	}
 
+	public Pair<Integer, Long> throwItem() {
+		var itemWorryLevel = this.getFirstWorryLevel();
 		final var monkeyIndex = this.nextMonkey.apply(itemWorryLevel);
 
-		itemWorryLevelList.remove(0);
+		this.itemWorryLevelList.remove(0);
 
 		return Pair.of(monkeyIndex, itemWorryLevel);
+	}
+
+	private Long getFirstWorryLevel() {
+		return this.itemWorryLevelList.get(0);
+	}
+
+	private void setFirstWorryLeve(final Long worryLevel) {
+		this.itemWorryLevelList.set(0, worryLevel);
 	}
 
 	public static Function<Long, Long> getUpdateWorryLevelFunction(final String operationLine) {

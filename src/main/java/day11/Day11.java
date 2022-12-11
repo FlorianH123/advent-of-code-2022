@@ -31,8 +31,8 @@ public class Day11 {
 	public static Long part2(final List<String> lines) {
 		var monkeys = parseMonkeys(lines);
 
-		// Didn't understand how to come up with this solution. Solution copied from
-		// reddit :(
+		// Didn't understand how to come up with this solution.
+		// Solution copied from reddit :(
 		var modulus = monkeys.stream().map(Monkey::getTestDivisor).reduce(1L, (x, y) -> x * y);
 
 		return playRounds(monkeys, 10_000, worryLevel -> worryLevel % modulus);
@@ -54,7 +54,8 @@ public class Day11 {
 			while (monkey.getItemWorryLevelList().size() > 0) {
 				monkey.inspectItem();
 				monkey.testWorryLevel();
-				final var monkeyIndexAndItem = monkey.throwItem(reliefFunction);
+				monkey.applyRelief(reliefFunction);
+				final var monkeyIndexAndItem = monkey.throwItem();
 
 				monkeys.get(monkeyIndexAndItem.left()).getItemWorryLevelList().add(monkeyIndexAndItem.right());
 			}
